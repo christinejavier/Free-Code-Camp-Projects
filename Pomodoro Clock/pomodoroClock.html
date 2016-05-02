@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+  <!-- Latest compiled JavaScript -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="pomodoroClock.js"></script>
+  <link rel="stylesheet" type="text/css" href="pomodoroClock.css">
+
+</head>
+<body>
+<div class="container">
+
+<div class="mainActivity">
+  <a href="#" id="addActivityTime" class="btn btn-primary">+</a>
+  <h1 id="activityTime">
+    <span id="activityMins">25</span>:<span id="activitySecs">00</span>
+  </h1>
+  <a href="#" id="minusActivityTime" class="btn btn-primary">-</a>
+</div>
+
+<div class="startButton">
+  <button type="button" id="pressStart" class="btn btn-success">Start</button>
+</div>
+
+
+<div class="breakNow">
+  <a href="#" id="addBreakTime" class="btn btn-primary">+</a>
+  <h1 id="breakTime">
+    <span id="breakMins">5</span>:<span id="breakSecs">00</span>
+  </h1>
+  <a href="#" id="minusBreakTime" class="btn btn-primary">-</a>
+</div>
+
+</div>
+</body>
