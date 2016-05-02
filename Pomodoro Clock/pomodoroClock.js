@@ -5,23 +5,41 @@ $( document ).ready(function() {
   $("#pressStop").hide();
   $("#pressReset").hide();
 
-  var initialActivityMins; //Placeholder for user's desired mins
-  var initialActivitySecs; //Placeholder for seconds. Without it, seconds change weird when clock resets
+  $("#startBreak").hide();
+  $("#pauseBreak").hide();
+  $("#resumeBreak").hide();
+  $("#stopBreak").hide();
+  $("#resetBreak").hide();
+
+  var initialActivityMins; //Placeholder for user's desired activity mins
+  var initialActivitySecs; //Placeholder for activity seconds. Without it, seconds change weird when clock resets
+
+  var initialBreakMins; //Placeholder for user's desired break mins
+  var initialBreakSecs; //Placeholder for break seconds. Without it, seconds change weird when clock resets
+
   var activityTimeVal; //Amount of time to do activity
   var breakTimeVal; //Amount of break time
-  var checkMins = $("#activityMins").text(); //Placeholder for user's desired activity time
+  var checkActivityMins = $("#activityMins").text(); //Placeholder for user's desired activity time
+  var checkBreakMins = $("#breakMins").text(); //Placeholder for user's desired break time
   var seconds = 59; //Seconds used for countdown
-  var countingDown; // Begins countdown
+  var activityCountdown; // Begins activity countdown
+  var breakCountdown; //Begins break countdown
 
   $("#addActivityTime").click(addActivityTime);
   $("#minusActivityTime").click(minusActivityTime);
-  $("#addBreakTime").click(addBreakTime);
-  $("#minusBreakTime").click(minusBreakTime);
   $("#pressStart").click(startActivityTimer);
   $("#pressPause").click(pauseActivity);
   $("#pressResume").click(resumeActivity);
   $("#pressStop").click(stopActivity);
   $("#pressReset").click(resetActivity);
+
+  $("#addBreakTime").click(addBreakTime);
+  $("#minusBreakTime").click(minusBreakTime);
+  $("#startBreak").click(startBreakTimer);
+  $("#pauseBreak").click(pauseBreak);
+  $("#resumeBreak").click(resumeBreak);
+  $("#stopBreak").click(stopBreak);
+  $("#resetBreak").click(resetBreak);
 
   function addActivityTime() { //Adds one minute to activity time
     activityTimeVal = $("#activityMins").text(); //Refers to 25 min in h1 tag
@@ -32,13 +50,14 @@ $( document ).ready(function() {
       $("#activityMins").text(activityTimeVal);
     }
     $("#activityMins").text(activityTimeVal); //Displays activity time
-    checkMins = $("#activityMins").text(); //Sets checkMins to user's ideal time. Allows for accurate countdown
+    checkActivityMins = $("#activityMins").text(); //Sets checkActivityMins to user's ideal time. Allows for accurate countdown
   }
 
   function minusActivityTime() { //Subtracts one minute from activity time
     activityTimeVal = $("#activityMins").text();//Refers to 25 min in h1 tag
     activityTimeVal = parseInt(activityTimeVal);//Changes 25 from string to number
-    if(activityTimeVal === 5) { //Limits minimum activity time to 5 minutes
+    if(activityTimeVal === 1) { //Limits minimum activity time to 5 minutes
+      //HERE HERE HERE CHANGE TO 5
       activityTimeVal = "0".concat(activityTimeVal);
       return $("#activityMins").text(activityTimeVal);
     }
@@ -48,7 +67,7 @@ $( document ).ready(function() {
       $("#activityMins").text(activityTimeVal);
     }
     $("#activityMins").text(activityTimeVal); //Displays activity time
-    checkMins = $("#activityMins").text(); //Sets checkMins to user's ideal time. Allows for accurate countdown
+    checkActivityMins = $("#activityMins").text(); //Sets checkActivityMins to user's ideal time. Allows for accurate countdown
   }
 
   function addBreakTime() { //Adds one minute to activity time
@@ -63,6 +82,7 @@ $( document ).ready(function() {
       $("#breakMins").text(breakTimeVal);
     }
     $("#breakMins").text(breakTimeVal); //Displays break time
+    checkBreakMins = $("#breakMins").text();
   }
 
   function minusBreakTime() { //Subtracts one minute from activity time
@@ -78,8 +98,8 @@ $( document ).ready(function() {
       $("#breakMins").text(breakTimeVal);
     }
     $("#breakMins").text(breakTimeVal); //Displays break time
+    checkBreakMins = $("#breakMins").text();//Sets checkBreakMins to user's ideal time. Allows for accurate countdown
   }
-
 
   function startActivityTimer() { //Initiates timer
     $("#pressStart").hide();
@@ -91,8 +111,22 @@ $( document ).ready(function() {
     $("#minusActivityTime").hide();
     initialActivityMins = $("#activityMins").text();
     initialActivitySecs = $("#activitySecs").text();
-    countingDown = setInterval(countdownActivitySeconds, 1000);
-    return countingDown;
+    activityCountdown = setInterval(countdownActivitySeconds, 1000);
+    return activityCountdown;
+  }
+
+  function startBreakTimer() {
+    $("startBreak").hide();
+    $("#pauseBreak").show();
+    $("#resumeBreak").hide();
+    $("#stopBreak").show();
+    $("#resetBreak").hide();
+    $("#addBreakTime").hide();
+    $("#minusActivityTime").hide();
+    initialBreakMins = $("#breakMins").text();
+    initialBreakSecs = $("#breakSecs").text();
+    breakCountdown = setInterval(countdownBreakSecs, 1000);
+    return breakCountdown;
   }
 
   function pauseActivity() { //Pauses activity timer
@@ -103,7 +137,18 @@ $( document ).ready(function() {
     $("#pressReset").hide();
     $("#addActivityTime").hide();
     $("#minusActivityTime").hide();
-    stopCountingDown();
+    stopActivityCountdown();
+  }
+
+  function pauseBreak() { //Pauses activity timer
+    $("#startBreak").hide();
+    $("#pauseBreak").hide();
+    $("#resumeBreak").show();
+    $("#stopBreak").show();
+    $("#resetBreak").hide();
+    $("#addBreakTime").hide();
+    $("#minusBreakTime").hide();
+    stopBreakCountdown();
   }
 
   function resumeActivity() { //Resumes activity timer
@@ -115,8 +160,20 @@ $( document ).ready(function() {
     $("#addActivityTime").hide();
     $("#minusActivityTime").hide();
 
-    countingDown = setInterval(countdownActivitySeconds, 1000);
-    return countingDown;
+    activityCountdown = setInterval(countdownActivitySeconds, 1000);
+    return activityCountdown;
+  }
+
+  function resumeBreak() { //Resumes activity timer
+    $("#startBreak").hide();
+    $("#pauseBreak").show();
+    $("#resumeBreak").hide();
+    $("#stopBreak").show();
+    $("#resetBreak").hide();
+    $("#addBreakTime").hide();
+    $("#minusBreakTime").hide();
+    breakCountdown = setInterval(countdownBreakSecs, 1000);
+    return breakCountdown;
   }
 
   function stopActivity() { //Stops activity timer
@@ -127,7 +184,18 @@ $( document ).ready(function() {
     $("#pressReset").show();
     $("#addActivityTime").hide();
     $("#minusActivityTime").hide();
-    return stopCountingDown();
+    return stopActivityCountdown();
+  }
+
+  function stopBreak() { //Stops activity timer
+    $("#startBreak").hide();
+    $("#pauseBreak").hide();
+    $("#resumeBreak").show();
+    $("#stopBreak").hide();
+    $("#resetBreak").show();
+    $("#addBreakTime").hide();
+    $("#minusBreakTime").hide();
+    return stopBreakCountdown();
   }
 
   function resetActivity() { //Resets timer
@@ -142,15 +210,38 @@ $( document ).ready(function() {
     $("#activitySecs").text(initialActivitySecs)
 
     //Variables will be redefined with user's wanted parameters
-    activityTimeVal = undefined; //Amount of time to do activity
-    breakTimeVal = undefined; //Amount of break time
-    checkMins = $("#activityMins").text();
+    activityTimeVal = undefined;
+    breakTimeVal = undefined;
+    checkActivityMins = $("#activityMins").text();
+    checkBreakMins = $("#breakMins").text();
     seconds = 59; //Seconds used for countdown
-    countingDown = undefined;;
+    activityCountdown = undefined;
+    breakCountdown = undefined;
+  }
+
+  function resetBreak() { //Resets timer
+    $("#startBreak").show();
+    $("#pauseBreak").hide();
+    $("#resumeBreak").hide();
+    $("#stopBreak").hide();
+    $("#resetBreak").hide();
+    $("#addBreakTime").show();
+    $("#minusBreakTime").show();
+    $("#breakMins").text(initialBreakMins)
+    $("#breakSecs").text(initialBreakSecs)
+
+    //Variables will be redefined with user's wanted parameters
+    activityTimeVal = undefined;
+    breakTimeVal = undefined;
+    checkActivityMins = $("#activityMins").text();
+    checkBreakMins = $("#breakMins").text();
+    seconds = 59; //Seconds used for countdown
+    activityCountdown = undefined;
+    breakCountdown = undefined;
   }
 
   function countdownActivitySeconds() { //Counts down seconds of activity timer
-    if($("#activityMins").text() === checkMins) {
+    if($("#activityMins").text(checkActivityMins)) {
       countdownActivityMins();
     }
     if (seconds < 0) {
@@ -158,7 +249,7 @@ $( document ).ready(function() {
       if($("#activityMins").text(mins)) { //Stops countdown once time is all zeroes
         $("#pressPause").hide();
         $("#pressStop").hide();
-        return stopCountingDown();
+        return stopActivityCountdown();
       //call function to start break timer
       }
       countdownActivityMins();
@@ -175,6 +266,33 @@ $( document ).ready(function() {
     seconds--;
   }
 
+  function countdownBreakSecs() { //Counts down seconds of activity timer
+    console.log($("#breakMins").text());
+    if($("#breakMins").text() === checkBreakMins) {
+      countdownBreakMins();
+    }
+    if (seconds < 0) {
+      var mins = "00";
+      if($("#breakMins").text(mins)) { //Stops countdown once time is all zeroes
+        $("#pauseBreak").hide();
+        $("#stopBreak").hide();
+        return stopBreakCountdown();
+      }
+      countdownBreakMins();
+      seconds = 59;
+      $("#breakSecs").text(seconds);
+      return countdownBreakMins();
+    }
+    else if(seconds < 10) {
+      $("#breakSecs").text("0" + seconds);
+    }
+    else {
+      $("#breakSecs").text(seconds);
+    }
+    seconds--;
+  }
+
+
   function countdownActivityMins() { //Counts down minutes of activity timer
     var mins = $("#activityMins").text();
     mins--;
@@ -186,11 +304,27 @@ $( document ).ready(function() {
     return $("#activityMins").text(mins);
   }
 
-  function stopCountingDown() {
-    return clearInterval(countingDown);
+  function countdownBreakMins() { //Counts down minutes of break timer
+    var mins = $("#breakMins").text();
+    mins--;
+    if (mins < 10) { //Adds extra 0 once minutes read 0; looks like "00" like a digital clock
+      mins = mins.toString();
+      mins = "0".concat(mins);
+      $("#breakMins").text(mins);
+    }
+    return $("#breakMins").text(mins);
+  }
+
+  function stopActivityCountdown() {
+    $("#startBreak").show();
+    return clearInterval(activityCountdown);
   }
 //CREATE PING FOR WHEN ACTIVITY TIMER IS DONE
 //INITIATE START OF BREAKTIME
+
+function stopBreakCountdown() {
+  return clearInterval(breakCountdown);
+}
 
   function addOne(answer) { //Adds one minute
     answer += 1;
