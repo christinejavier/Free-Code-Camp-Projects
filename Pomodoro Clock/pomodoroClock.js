@@ -49,14 +49,22 @@ function addActivityTime() { //Adds one minute to activity time
 }
 
 function minusActivityTime() { //Subtracts one minute from activity time
-  activityTimeVal = $("#activityMins").text(); //Refers to 25 min in h1 tag
-  activityTimeVal = parseInt(activityTimeVal); //Changes 25 from string to number
-  activityTimeVal = subtractOne(activityTimeVal); //Callback function to subtract one minute LINE
-  if (activityTimeVal === 5) { //Limits minimum activity time to 5 minutes
-    //HERE HERE HERE CHANGE TO 5
-    activityTimeVal = "0".concat(activityTimeVal);
-    return $("#activityMins").text(activityTimeVal);
+  if (activityTimeVal === 5) { //NEW EDIT
+    activityTimeVal = $("#activityMins").text();
   }
+
+  activityTimeVal = $("#activityMins").text(); //Refers to 25 min in h1 tag
+  console.log(activityTimeVal);
+  activityTimeVal = parseInt(activityTimeVal); //Changes 25 from string to number
+  if (activityTimeVal > 5) { //NEW EDIT must change to 5
+    activityTimeVal = "0".concat(activityTimeVal);
+    activityTimeVal = subtractOne(activityTimeVal); //Callback function to subtract one minute LINE
+}
+  // if (activityTimeVal === 5) { //Limits minimum activity time to 5 minutes
+  //   //HERE HERE HERE CHANGE TO 5
+  //   activityTimeVal = "0".concat(activityTimeVal);
+  //   return $("#activityMins").text(activityTimeVal);
+  // }
   if (activityTimeVal < 10) { //Concats "0" in front of single digit nums
     activityTimeVal = "0".concat(activityTimeVal);
     $("#activityMins").text(activityTimeVal);
@@ -263,25 +271,46 @@ function countdownActivitySeconds() { //Counts down seconds of activity timer
 }
 
 function countdownActivityMins() { //Counts down minutes of activity timer
+  var mins = $("#activityMins").text();
+  mins = parseInt(mins);
   if ($("#activityMins").text() === checkActivityMins) {
     $("#activitySecs").text(seconds);
   }
-  var mins = $("#activityMins").text();
-  mins = parseInt(mins);
-  mins--;
-  if (seconds < 0) {
+  //ORIGINALLY WHERE VAR MINS WAS --> MINS--
+  if (seconds < 0.5) {
+    console.log(mins);
+    console.log(Boolean(mins < 0));
+    if(mins < 1) { // Ends activity timer when 00:00 is reached
+      console.log(mins);
+
+      return endActivity();
+    }
+    else {
+      mins = mins.toString();
+      mins = "0".concat(mins);
     seconds = 59;
     seconds = seconds.toString();
     $("#activitySecs").text(seconds);
-    console.log(seconds);
     countdownActivitySeconds();
     //$("#activityMins").text(mins);
+    }
   }
-  if (mins < 10) { //Adds extra 0 once minutes read 0; looks like "00" like a digital clock
+  else if (mins < 10) { //Adds extra 0 once minutes read 0; looks like "00" like a digital clock
+  //MINS = PARSEINT HERE
+  mins = parseInt(mins);
+  mins--;
     mins = mins.toString();
     mins = "0".concat(mins);
+    console.log("this works");
     return $("#activityMins").text(mins);
   }
+  mins = parseInt(mins);
+  mins--;
+  if (mins < 10) {
+    mins = mins.toString();
+    mins = "0".concat(mins);
+  }
+  console.log(mins);
   return $("#activityMins").text(mins);
 }
 
@@ -326,6 +355,11 @@ function stopActivityCountdown() {
 
 function endActivity() {
   clearInterval(activityCountdown);
+  $("#pressStart").hide();
+  $("#pressPause").hide();
+  $("#pressResume").hide();
+  $("#pressStop").hide();
+  $("#pressReset").hide();
   return setupBreakStart();
 }
 //CREATE PING FOR WHEN ACTIVITY TIMER IS DONE
