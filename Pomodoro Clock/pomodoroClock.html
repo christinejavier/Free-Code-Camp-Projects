@@ -12,39 +12,54 @@
   <!-- Latest compiled JavaScript -->
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script src="pomodoroClock.js"></script>
-  <link rel="stylesheet" type="text/css" href="pomodoroClock.css">
+  <link rel="stylesheet" type="text/css" href="pomodoroClock.css" />
+
+  <link rel="stylesheet" href="esencia.css" type="text/css" charset="utf-8" />
 
 </head>
 <body>
-<div class="container">
+<div class="container bg-success">
 
-<div class="mainActivity">
-  <a href="#" id="addActivityTime" class="btn btn-primary">+</a>
-  <h1 id="activityTime">
-    <span id="activityMins">25</span>:<span id="activitySecs">00</span>
-  </h1>
-  <a href="#" id="minusActivityTime" class="btn btn-primary">-</a>
+<div class="row">
+
+<h1 id="mainTitle" class="mainTitlee col-xs-6 col-md-12">Pomodoro Clock</h1>
 </div>
 
-<div class="startButton">
+
+<div class="row">
+
+<div class="startButton col-xs-6 col-xs-6-offset col-md-4 col-md-offset-4">
   <button type="button" id="pressStart" class="btn btn-success">Start</button>
 </div>
 
-<div class="pauseButton">
-  <button type="button" id="pressPause" class="btn btn-success">Pause</button>
+<div class="row">
+  <div class="stage1 col-xs-6 col-xs-6-offset col-md-4 col-md-offset-4">
+
+    <div class="pauseButton">
+      <button type="button" id="pressPause" class="btn btn-success">Pause</button>
+    </div>
+
+    <div class="resumeButton">
+      <button type="button" id="pressResume" class="btn btn-success">Resume</button>
+    </div>
+
+    <div class="resetButton">
+      <button type="button" id="pressReset" class="btn btn-success">Reset</button>
+    </div>
+
+    <div class="stopButton">
+      <button type="button" id="pressStop" class="btn btn-success">Stop</button>
+    </div>
+  </div>
 </div>
 
-<div class="resumeButton">
-  <button type="button" id="pressResume" class="btn btn-success">Resume</button>
+
+
 </div>
 
-<div class="stopButton">
-  <button type="button" id="pressStop" class="btn btn-success">Stop</button>
-</div>
 
-<div class="resetButton">
-  <button type="button" id="pressReset" class="btn btn-success">Reset</button>
-</div>
+<div class="row">
+<div class="stage1 col-xs-6 col-xs-6-offset col-md-4 col-md-offset-4">
 
 <div class="startBreak">
   <button type="button" id="startBreak" class="btn btn-success">Start Break</button>
@@ -66,14 +81,40 @@
   <button type="button" id="resetBreak" class="btn btn-success">Reset break</button>
 </div>
 
+</div>
 
-<div class="breakNow">
-  <a href="#" id="addBreakTime" class="btn btn-primary">+</a>
+
+<div class="row">
+<div class="workTitleTime col-md-6">
+
+<h2>Work Timer</h2>
+</div>
+
+<div class="breakTitleTime col-md-6">
+
+<h2>Break Timer</h2>
+</div>
+
+</div>
+
+<div class="row">
+<div class="mainActivity col-md-6">
+  <a href="#" id="minusActivityTime" class="btn btn-primary">-</a>
+  <h1 id="activityTime">
+    <span id="activityMins">25</span>:<span id="activitySecs">00</span>
+  </h1>
+  <a href="#" id="addActivityTime" class="btn btn-primary">+</a>
+</div>
+
+
+<div class="breakNow col-md-6">
+  <a href="#" id="minusBreakTime" class="btn btn-primary">-</a>
   <h1 id="breakTime">
     <span id="breakMins">05</span>:<span id="breakSecs">00</span>
   </h1>
-  <a href="#" id="minusBreakTime" class="btn btn-primary">-</a>
+  <a href="#" id="addBreakTime" class="btn btn-primary">+</a>
+</div>
 </div>
 
-</div>
 </body>
+</div>

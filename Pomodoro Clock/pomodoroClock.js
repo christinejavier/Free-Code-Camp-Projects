@@ -52,19 +52,12 @@ function minusActivityTime() { //Subtracts one minute from activity time
   if (activityTimeVal === 5) { //NEW EDIT
     activityTimeVal = $("#activityMins").text();
   }
-
   activityTimeVal = $("#activityMins").text(); //Refers to 25 min in h1 tag
-  console.log(activityTimeVal);
   activityTimeVal = parseInt(activityTimeVal); //Changes 25 from string to number
   if (activityTimeVal > 5) { //NEW EDIT must change to 5
     activityTimeVal = "0".concat(activityTimeVal);
     activityTimeVal = subtractOne(activityTimeVal); //Callback function to subtract one minute LINE
-}
-  // if (activityTimeVal === 5) { //Limits minimum activity time to 5 minutes
-  //   //HERE HERE HERE CHANGE TO 5
-  //   activityTimeVal = "0".concat(activityTimeVal);
-  //   return $("#activityMins").text(activityTimeVal);
-  // }
+  }
   if (activityTimeVal < 10) { //Concats "0" in front of single digit nums
     activityTimeVal = "0".concat(activityTimeVal);
     $("#activityMins").text(activityTimeVal);
@@ -72,36 +65,39 @@ function minusActivityTime() { //Subtracts one minute from activity time
   $("#activityMins").text(activityTimeVal); //Displays activity time
   checkActivityMins = $("#activityMins").text(); //Sets checkActivityMins to user's ideal time.
 }
+//TODO edit the least amount of activity time
 
 function addBreakTime() { //Adds one minute to activity time
-  breakTimeVal = $("#breakMins").text(); //Refers to 5 min in h1 tag
-  breakTimeVal = parseInt(breakTimeVal); //Changes 5 from string to number
-  if (breakTimeVal === 30) { // Limits max break time to 30 minutes
-    return $("#breakMins").text(breakTimeVal);
-  }
+  breakTimeVal = $("#breakMins").text(); //Refers to 25 min in h1 tag
+  breakTimeVal = parseInt(breakTimeVal); //Changes 25 from string to number
   breakTimeVal = addOne(breakTimeVal); //Callback function to add one minute
+  if (breakTimeVal === 31) { //NEW EDIT must change to 5
+    breakTimeVal = subtractOne(breakTimeVal); //Callback function to subtract one minute LINE
+  }
   if (breakTimeVal < 10) { //Concats "0" in front of single digit nums
     breakTimeVal = "0".concat(breakTimeVal);
     $("#breakMins").text(breakTimeVal);
   }
-  $("#breakMins").text(breakTimeVal); //Displays break time
-  checkBreakMins = $("#breakMins").text();
+  $("#breakMins").text(breakTimeVal); //Displays activity time
+  checkBreakMins = $("#breakMins").text(); //Sets checkActivityMins to user's ideal time
 }
 
 function minusBreakTime() { //Subtracts one minute from activity time
-  breakTimeVal = $("#breakMins").text(); //Refers to 5 min in h1 tag
-  breakTimeVal = parseInt(breakTimeVal); //Changes 5 from string to number
-  if (breakTimeVal === 1) { //Limits minimum break time to 1 minute
-    breakTimeVal = "0".concat(breakTimeVal);
-    return $("#breakMins").text(breakTimeVal);
+  if (breakTimeVal === 5) { //NEW EDIT
+    breakTimeVal = $("#breakMins").text();
   }
-  breakTimeVal = subtractOne(breakTimeVal); //Callback function to subtract one minute
+  breakTimeVal = $("#breakMins").text(); //Refers to 25 min in h1 tag
+  breakTimeVal = parseInt(breakTimeVal); //Changes 25 from string to number
+  if (breakTimeVal > 1) { //NEW EDIT must change to 5
+    breakTimeVal = "0".concat(breakTimeVal);
+    breakTimeVal = subtractOne(breakTimeVal); //Callback function to subtract one minute LINE
+  }
   if (breakTimeVal < 10) { //Concats "0" in front of single digit nums
     breakTimeVal = "0".concat(breakTimeVal);
     $("#breakMins").text(breakTimeVal);
   }
-  $("#breakMins").text(breakTimeVal); //Displays break time
-  checkBreakMins = $("#breakMins").text(); //Sets checkBreakMins to user's ideal time
+  $("#breakMins").text(breakTimeVal); //Displays activity time
+  checkBreakMins = $("#breakMins").text(); //Sets checkActivityMins to user's ideal time.
 }
 
 function startActivityTimer() { //Initiates timer
@@ -241,19 +237,6 @@ function countdownActivitySeconds() { //Counts down seconds of activity timer
   if ($("#activityMins").text() === checkActivityMins) {
     countdownActivityMins();
   }
-  // console.log(Boolean(seconds<0.5));
-  // if (seconds < 0.5) {
-  //   var mins = "00";
-  //   if ($("#activityMins").text(mins)) { //Stops countdown once time is all zeroes
-  //     $("#pressPause").hide();
-  //     $("#pressStop").hide();
-  //     return endActivity();
-  //   }
-  // }
-  //CHANGED got the activity mins countdown to work, but the activity decrementor is all messed up. They are very intertwined
-  //TODO make the activity seconds @ 0 read "00"
-  //TODO make the decrementor stop @ 5, and still countdown properly
-
   if (seconds < 10 && seconds > 0) {
     seconds = seconds.toString();
     var extra0 = "0" + seconds;
@@ -276,32 +259,24 @@ function countdownActivityMins() { //Counts down minutes of activity timer
   if ($("#activityMins").text() === checkActivityMins) {
     $("#activitySecs").text(seconds);
   }
-  //ORIGINALLY WHERE VAR MINS WAS --> MINS--
   if (seconds < 0.5) {
-    console.log(mins);
-    console.log(Boolean(mins < 0));
     if(mins < 1) { // Ends activity timer when 00:00 is reached
-      console.log(mins);
-
       return endActivity();
     }
     else {
       mins = mins.toString();
       mins = "0".concat(mins);
-    seconds = 59;
-    seconds = seconds.toString();
-    $("#activitySecs").text(seconds);
-    countdownActivitySeconds();
-    //$("#activityMins").text(mins);
+      seconds = 59;
+      seconds = seconds.toString();
+      $("#activitySecs").text(seconds);
+      countdownActivitySeconds();
     }
   }
   else if (mins < 10) { //Adds extra 0 once minutes read 0; looks like "00" like a digital clock
-  //MINS = PARSEINT HERE
-  mins = parseInt(mins);
-  mins--;
+    mins = parseInt(mins);
+    mins--;
     mins = mins.toString();
     mins = "0".concat(mins);
-    console.log("this works");
     return $("#activityMins").text(mins);
   }
   mins = parseInt(mins);
@@ -310,43 +285,62 @@ function countdownActivityMins() { //Counts down minutes of activity timer
     mins = mins.toString();
     mins = "0".concat(mins);
   }
-  console.log(mins);
   return $("#activityMins").text(mins);
 }
 
 function countdownBreakSecs() { //Counts down seconds of activity timer
-  if ($("#breakMins").text(checkBreakMins)) {
+  if ($("#breakMins").text() === checkBreakMins) {
     countdownBreakMins();
+  }
+  if (seconds2 < 10 && seconds2 > 0) {
+    seconds2 = seconds2.toString();
+    seconds2 = parseInt(seconds2);
   }
   if (seconds2 < 0) {
-    var mins2 = "00";
-    if ($("#breakMins").text(mins2)) { //Stops countdown once time is all zeroes
-      $("#pauseBreak").hide();
-      $("#stopBreak").hide();
-      return restartClock();
-    }
-    countdownBreakMins();
-    seconds2 = 59;
-    $("#breakSecs").text(seconds2);
-    return countdownBreakSecs();
-  } else if (seconds2 < 10) {
-    $("#breakSecs").text("0" + seconds2);
-  } else {
-    $("#breakSecs").text(seconds2);
+    return countdownBreakMins();
   }
+  if (seconds2 < 10) {
+    seconds2 = seconds2.toString();
+    seconds2 = "0" + seconds2;
+  }
+  $("#breakSecs").text(seconds2);
   seconds2--;
 }
 
 
 function countdownBreakMins() { //Counts down minutes of break timer
   var mins2 = $("#breakMins").text();
-  mins2--;
-  if (mins2 < 10) { //Adds extra 0 once minutes read 0; looks like "00" like a digital clock
-    mins2 = mins2.toString();
-    mins2 = "0".concat(mins2);
-    $("#breakMins").text(mins2);
-  }
-  return $("#breakMins").text(mins2);
+    mins2 = parseInt(mins2);
+    if ($("#breakMins").text() === checkBreakMins) {
+      $("#breakSecs").text(seconds2);
+    }
+    if (seconds2 < 0.5) {
+      if(mins2 < 1) { // Ends break timer when 00:00 is reached
+        return restartClock();///
+      }
+      else {
+        mins2 = mins2.toString();
+        mins2 = "0".concat(mins2);
+        seconds2 = 59;
+        seconds2 = seconds2.toString();
+        $("#breakSecs").text(seconds2);
+        countdownBreakSecs();
+      }
+    }
+    else if (mins2 < 10) { //Adds extra 0 once minutes read 0; looks like "00" like a digital clock
+      mins2 = parseInt(mins2);
+      mins2--;
+      mins2 = mins2.toString();
+      mins2 = "0".concat(mins2);//prob wrong
+      return $("#breakMins").text(mins2);
+    }
+    mins2 = parseInt(mins2);
+    mins2--;
+    if (mins2 < 10) {
+      mins2 = mins2.toString();
+      mins2 = "0".concat(mins2);
+    }
+    return $("#breakMins").text(mins2);
 }
 
 function stopActivityCountdown() {
