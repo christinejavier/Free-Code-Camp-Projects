@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 $("#pressStart").show();
 $("#pressPause").hide();
 $("#pressResume").hide();
@@ -36,6 +37,8 @@ $("#resumeBreak").click(resumesBreak);
 $("#stopBreak").click(stopBreak);
 $("#resetBreak").click(resetBreak);
 
+var audio = $("#mySoundClip")[0];
+
 function addActivityTime() { //Adds one minute to activity time
   activityTimeVal = $("#activityMins").text(); //Refers to 25 min in h1 tag
   activityTimeVal = parseInt(activityTimeVal); //Changes 25 from string to number
@@ -49,12 +52,12 @@ function addActivityTime() { //Adds one minute to activity time
 }
 
 function minusActivityTime() { //Subtracts one minute from activity time
-  if (activityTimeVal === 5) { //NEW EDIT
+  if (activityTimeVal === 5) {
     activityTimeVal = $("#activityMins").text();
   }
   activityTimeVal = $("#activityMins").text(); //Refers to 25 min in h1 tag
   activityTimeVal = parseInt(activityTimeVal); //Changes 25 from string to number
-  if (activityTimeVal > 5) { //NEW EDIT must change to 5
+  if (activityTimeVal > 5) {
     activityTimeVal = "0".concat(activityTimeVal);
     activityTimeVal = subtractOne(activityTimeVal); //Callback function to subtract one minute LINE
   }
@@ -65,14 +68,13 @@ function minusActivityTime() { //Subtracts one minute from activity time
   $("#activityMins").text(activityTimeVal); //Displays activity time
   checkActivityMins = $("#activityMins").text(); //Sets checkActivityMins to user's ideal time.
 }
-//TODO edit the least amount of activity time
 
 function addBreakTime() { //Adds one minute to activity time
   breakTimeVal = $("#breakMins").text(); //Refers to 25 min in h1 tag
   breakTimeVal = parseInt(breakTimeVal); //Changes 25 from string to number
   breakTimeVal = addOne(breakTimeVal); //Callback function to add one minute
   if (breakTimeVal === 31) { //NEW EDIT must change to 5
-    breakTimeVal = subtractOne(breakTimeVal); //Callback function to subtract one minute LINE
+    breakTimeVal = subtractOne(breakTimeVal); //Callback function to subtract one minute
   }
   if (breakTimeVal < 10) { //Concats "0" in front of single digit nums
     breakTimeVal = "0".concat(breakTimeVal);
@@ -83,12 +85,12 @@ function addBreakTime() { //Adds one minute to activity time
 }
 
 function minusBreakTime() { //Subtracts one minute from activity time
-  if (breakTimeVal === 5) { //NEW EDIT
+  if (breakTimeVal === 5) {
     breakTimeVal = $("#breakMins").text();
   }
   breakTimeVal = $("#breakMins").text(); //Refers to 25 min in h1 tag
   breakTimeVal = parseInt(breakTimeVal); //Changes 25 from string to number
-  if (breakTimeVal > 1) { //NEW EDIT must change to 5
+  if (breakTimeVal > 1) {
     breakTimeVal = "0".concat(breakTimeVal);
     breakTimeVal = subtractOne(breakTimeVal); //Callback function to subtract one minute LINE
   }
@@ -115,6 +117,7 @@ function startActivityTimer() { //Initiates timer
 }
 
 function startBreakTimer() { //Starts break timer
+  audio.pause();
   $("#pauseBreak").show();
   $("#stopBreak").show();
   $("#startBreak").hide();
@@ -261,6 +264,7 @@ function countdownActivityMins() { //Counts down minutes of activity timer
   }
   if (seconds < 0.5) {
     if(mins < 1) { // Ends activity timer when 00:00 is reached
+      audio.play();
       return endActivity();
     }
     else {
@@ -316,6 +320,7 @@ function countdownBreakMins() { //Counts down minutes of break timer
     }
     if (seconds2 < 0.5) {
       if(mins2 < 1) { // Ends break timer when 00:00 is reached
+        audio.play();
         return restartClock();///
       }
       else {
@@ -356,8 +361,6 @@ function endActivity() {
   $("#pressReset").hide();
   return setupBreakStart();
 }
-//CREATE PING FOR WHEN ACTIVITY TIMER IS DONE
-//INITIATE START OF BREAKTIME
 
 function setupBreakStart() {
   $("#startBreak").show();
