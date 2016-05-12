@@ -33,6 +33,8 @@ images[30] = "https://images.unsplash.com/reserve/Mj7V8XkOQLqVOyeXxixu_fierari-b
 
 function getQuote() {
   $("#quoteTitle").hide();
+  $(".wherePixWillBe").hide();
+  $("#getMessage").text("NEXT QUOTE");
   var imgCount = 30;
   var randomCount = Math.round(Math.random() * (imgCount - 1)) + 1;
   document.body.style.backgroundImage = 'url(' + images[randomCount] +
