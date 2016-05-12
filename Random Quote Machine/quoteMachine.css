@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'passionbold';
+    src: url('passionone-regular-webfont.woff2') format('woff2'),
+         url('passionone-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'oswald_regularregular';
+    src: url('oswald-regular-webfont.woff2') format('woff2'),
+         url('oswald-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'sansitabolditalic';
+    src: url('sansita-bolditalic-webfont.woff2') format('woff2'),
+         url('sansita-bolditalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+  margin-left: 0%;
+  padding-left: 0%;
+}
+
+.entireQuoteSection{
+  position: absolute;
+  background-color: black;
+  opacity: 1;
+  width: 40%;
+  height: 100%;
+  left: 0px;
+}
+
+.btn {
+    padding: 14px 24px;
+    font-size: 110%;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#quoteTitle{
+  font-family: "passionbold";
+  font-size: 100px;
+  margin-top: 45%;
+}
+
+#quote{
+  color: #FFFBF6;
+  letter-spacing: 3px;
+  font-family: "sansitabolditalic";
+  font-size: 290%;
+  margin-top: 25%;
+}
+
+#quoteSayer{
+  color: #FFFBF6;
+  font-family: "oswald_regularregular";
+  letter-spacing: 4px;
+  font-size: 170%;
+  margin-top: 10%;
+  margin-bottom: 20%;
+}
+
+#getMessage{
+  font-style: "passionbold";
+  color: #FFFBF6;
+  background-color: #3D7FA2;
+  border-color: #3D7FA2;
+  width: 50%;
+  -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+#getMessage:hover{
+  font-style: "passionbold";
+  color: white;
+  background-color: #000;
+}
