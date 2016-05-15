@@ -44,41 +44,19 @@ function getQuote() {
   document.body.style.backgroundPosition = "center center";
 
   $.ajax({
-    headers: {
-      "X-Mashape-Key": "OivH71yd3tmshl9YKzFH7BTzBVRQp1RaKLajsnafgL2aPsfP9V",
-      Accept: "application/json",
-      "Content-Type": "application/x-www-form-urlencoded"
-    }, //Where do you find all dis
-    url: 'https://andruxnet-random-famous-quotes.p.mashape.com/cat=',
-    //where do you get this url from
+    method: "GET",
+    url: "http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?",
+    dataType: "jsonp",
+    error: function() {
+      console.log("this doesn't work");
+    },
     success: function(response) {
-      var currentQuote = '',
-        currentAuthor = '';
-      var data = JSON.parse(response);
-      currentQuote = data.quote;
-      currentAuthor = data.author;
-      $("#quote").text('"' + currentQuote + '"');
-      $("#quoteSayer").text("-" + currentAuthor);
+      $("#quote").text('"' + response.quoteText + '"');
+      $("#quoteSayer").text('-' + response.quoteAuthor);
     }
   });
 }
 
 $(document).ready(function() {
-  window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
-
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
-
-  return t;
-}(document, "script", "twitter-wjs"));
   $("#getMessage").click(getQuote);
 });
