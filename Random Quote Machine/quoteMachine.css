@@ -1,45 +1,46 @@
 @font-face {
-    font-family: 'passionbold';
-    src: url('passionone-regular-webfont.woff2') format('woff2'),
-         url('passionone-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'passionbold';
+  src: url('passionone-regular-webfont.woff2') format('woff2'), url('passionone-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-    font-family: 'oswald_regularregular';
-    src: url('oswald-regular-webfont.woff2') format('woff2'),
-         url('oswald-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'oswald_regularregular';
+  src: url('oswald-regular-webfont.woff2') format('woff2'), url('oswald-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-    font-family: 'sansitabolditalic';
-    src: url('sansita-bolditalic-webfont.woff2') format('woff2'),
-         url('sansita-bolditalic-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'sansitabolditalic';
+  src: url('sansita-bolditalic-webfont.woff2') format('woff2'), url('sansita-bolditalic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
-
-body{
+body {
   margin-left: 0%;
   padding-left: 0%;
 }
-
-.wherePixWillBe{
+#firstPageQuotes {
+  align-content: center;
+}
+#quoteTitle {
+  color: #92908D;
+}
+.wherePixWillBe {
   position: absolute;
   background-color: #fff;
   border-style: solid;
   border-width: 5px;
   opacity: 1;
-  width: 40%;
-  height: 50%;
+  width: 45%;
+  height: 55%;
   right: 118px;
   font-family: "passionbold", "Candal", sans-serif;
   font-size: 400%;
-  margin-top: 17%;
+  margin-top: 12%;
+  padding-top: 1.5%;
 }
-
-.entireQuoteSection{
+.entireQuoteSection {
   position: absolute;
   background-color: #000;
   padding-left: 4%;
@@ -49,33 +50,29 @@ body{
   height: 100%;
   left: 0px;
 }
-
-h2{
+h2 {
   color: ;
   font-family: "passionbold", "Candal", sans-serif;
   font-size: 400%;
   margin-top: 45%;
 }
-
 .btn {
-    padding: 14px 24px;
-    font-size: 110%;
-    border: 0 none;
-    font-weight: 700;
-    word-wrap: break-word;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+  padding: 14px 24px;
+  font-size: 110%;
+  border: 0 none;
+  font-weight: 700;
+  word-wrap: break-word;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
-
-#quote{
+#quote {
   color: #FFFBF6;
   letter-spacing: 3px;
   font-family: "sansitabolditalic", "Candal", sans-serif;
   font-size: 200%;
   margin-top: 20%;
 }
-
-#quoteSayer{
+#quoteSayer {
   color: #FFFBF6;
   font-family: "oswald_regularregular", 'Yanone Kaffeesatz', sans-serif;
   letter-spacing: 4px;
@@ -83,32 +80,22 @@ h2{
   margin-top: 10%;
   margin-bottom: 20%;
 }
-
-#getMessage{
+#getMessage {
   font-style: "passionbold";
   color: #FFFBF6;
   background-color: #3D7FA2;
   border-color: #3D7FA2;
   width: 50%;
-  -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
 }
-
-#getMessage:hover{
+#getMessage:hover {
   font-style: "passionbold";
   color: white;
   background-color: #000;
 }
-
-.tweet{
-  /*border-style: solid;
-  border-width: 4px;
-  border-color: white;*/
+.tweet {
   text-align: center;
   margin-top: 20%;
 }
-
-/*#tweetButton{
-  text-align: center;
-  margin-top: 30%;
-}*/

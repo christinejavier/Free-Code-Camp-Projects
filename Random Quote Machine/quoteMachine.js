@@ -43,8 +43,6 @@ function getQuote() {
   document.body.style.backgroundAttachment = "fixed";
   document.body.style.backgroundPosition = "center center";
 
-  //TWITTER URL https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=%22Soylent%20Green%20is%20people!%22%20Soylent%20Green
-  //https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=
   $.ajax({
     method: "GET",
     url: "http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?",
@@ -53,31 +51,32 @@ function getQuote() {
       console.log("this doesn't work");
     },
     success: function(response) {
-      var quote;
       var lastChar = response.quoteText[response.quoteText.length - 1];
-      if (lastChar === " "){
+      if (lastChar === " ") {
         var standIn = response.quoteText.split("");
         var i = response.quoteText.length - 1;
-        while(standIn[i] === " "){
+        while (standIn[i] === " ") {
           var removed = standIn.splice(i, 1);
           i--;
         }
         response.quoteText = standIn.join("");
       }
-      if(response.quoteAuthor.length === 0){
+      if (response.quoteAuthor.length === 0) {
         response.quoteAuthor = "Unknown";
       }
 
-//TODO tweet must capture proper quotes 
+      //TODO tweet must capture proper quotes
       $("#quote").text('"' + response.quoteText + '"');
       $("#quoteSayer").text('-' + response.quoteAuthor);
       var randomQuote = encodeURIComponent('"' + response.quoteText + '"' + ' -' + response.quoteAuthor);
       var urlForTweet = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + randomQuote;
       $("#tweetButton").show();
-      $("#tweetButton").click(function(){
-        window.open(urlForTweet);
+      $("#tweetButton").click(function() {
+        var correspondingUrl = urlForTweet;
+        window.open(correspondingUrl, "myWindow");
+        correspondingUrl = undefined;
+        urlForTweet = undefined;
       });
-
     }
   });
 }
