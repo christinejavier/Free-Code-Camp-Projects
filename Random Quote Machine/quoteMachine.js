@@ -64,19 +64,12 @@ function getQuote() {
       if (response.quoteAuthor.length === 0) {
         response.quoteAuthor = "Unknown";
       }
-
-      //TODO tweet must capture proper quotes
       $("#quote").text('"' + response.quoteText + '"');
       $("#quoteSayer").text('-' + response.quoteAuthor);
       var randomQuote = encodeURIComponent('"' + response.quoteText + '"' + ' -' + response.quoteAuthor);
       var urlForTweet = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + randomQuote;
       $("#tweetButton").show();
-      $("#tweetButton").click(function() {
-        var correspondingUrl = urlForTweet;
-        window.open(correspondingUrl, "myWindow");
-        correspondingUrl = undefined;
-        urlForTweet = undefined;
-      });
+      $('#tweetButton').attr('href', urlForTweet);
     }
   });
 }

@@ -13,7 +13,6 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Candal|Yanone+Kaffeesatz:300' rel='stylesheet' type='text/css'>
 
-  <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="quoteMachine.css" />
@@ -25,12 +24,11 @@
 <body>
   <div class="container" id="mainThing">
     <div class="text-center wherePixWillBe">
-      Click start to get inspired
+      Click <span id="start">start</span> to get inspired
       <img id="firstPageQuotes" src="http://college.wfu.edu/writingcenter/wp-content/uploads/quotation-marks.jpg" />
       <br />
     </div>
     <div class="entireQuoteSection">
-
       <div class="row text-center">
         <div class="col-lg-12">
           <h2 id="quoteTitle">Quote Machine</h2>
@@ -50,7 +48,7 @@
       </div>
 
       <div class="tweet">
-        <a href="javascript:void(0);" id="tweetButton">
+        <a href="" id="tweetButton" target="_blank">
           <i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i>
         </a>
       </div>
